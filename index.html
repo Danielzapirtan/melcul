@@ -167,6 +167,7 @@
             display: flex;
             gap: 10px;
             margin-top: 10px;
+            flex-wrap: wrap;
         }
         
         .btn {
@@ -275,11 +276,14 @@
         
         .subject-name {
             font-weight: 500;
+            word-break: break-word;
+            margin-right: 10px;
         }
         
         .subject-grade {
             font-weight: 600;
             color: #4a6491;
+            white-space: nowrap;
         }
         
         .instructions {
@@ -352,70 +356,50 @@
                     </div>
                     
                     <div id="semester1-form" class="semester-form active">
-                        <div class="subject-input">
-                            <input type="text" class="subject-name" placeholder="Nume materie (ex: Metodologia cercetării)">
-                            <input type="number" min="1" max="10" step="0.1" class="grade-input" placeholder="Nota">
-                            <button class="btn btn-secondary remove-subject"><i class="fas fa-times"></i></button>
-                        </div>
-                        
-                        <div class="subject-input">
-                            <input type="text" class="subject-name" placeholder="Nume materie (ex: Statistică avansată)">
-                            <input type="number" min="1" max="10" step="0.1" class="grade-input" placeholder="Nota">
-                            <button class="btn btn-secondary remove-subject"><i class="fas fa-times"></i></button>
-                        </div>
-                        
-                        <div class="subject-input">
-                            <input type="text" class="subject-name" placeholder="Nume materie (ex: Studii de specialitate)">
-                            <input type="number" min="1" max="10" step="0.1" class="grade-input" placeholder="Nota">
-                            <button class="btn btn-secondary remove-subject"><i class="fas fa-times"></i></button>
+                        <div id="sem1-inputs-container">
+                            <div class="subject-input">
+                                <input type="text" class="subject-name" placeholder="Nume materie" maxlength="100">
+                                <input type="number" min="1" max="10" step="0.01" class="grade-input" placeholder="Nota">
+                                <button type="button" class="btn btn-secondary remove-subject"><i class="fas fa-times"></i></button>
+                            </div>
                         </div>
                         
                         <div class="actions">
-                            <button class="btn btn-secondary" id="add-subject-sem1">
+                            <button type="button" class="btn btn-secondary" id="add-subject-sem1">
                                 <i class="fas fa-plus btn-icon"></i> Adaugă Materie
                             </button>
-                            <button class="btn btn-primary" id="calculate-sem1">
-                                <i class="fas fa-calculator btn-icon"></i> Calculează Media Semestrul I
+                            <button type="button" class="btn btn-primary" id="calculate-sem1">
+                                <i class="fas fa-calculator btn-icon"></i> Calculează Media
                             </button>
                         </div>
                     </div>
                     
                     <div id="semester2-form" class="semester-form">
-                        <div class="subject-input">
-                            <input type="text" class="subject-name" placeholder="Nume materie (ex: Elaborarea tezei de doctorat)">
-                            <input type="number" min="1" max="10" step="0.1" class="grade-input" placeholder="Nota">
-                            <button class="btn btn-secondary remove-subject"><i class="fas fa-times"></i></button>
-                        </div>
-                        
-                        <div class="subject-input">
-                            <input type="text" class="subject-name" placeholder="Nume materie (ex: Comunicare academică)">
-                            <input type="number" min="1" max="10" step="0.1" class="grade-input" placeholder="Nota">
-                            <button class="btn btn-secondary remove-subject"><i class="fas fa-times"></i></button>
-                        </div>
-                        
-                        <div class="subject-input">
-                            <input type="text" class="subject-name" placeholder="Nume materie (ex: Cercetare aplicată)">
-                            <input type="number" min="1" max="10" step="0.1" class="grade-input" placeholder="Nota">
-                            <button class="btn btn-secondary remove-subject"><i class="fas fa-times"></i></button>
+                        <div id="sem2-inputs-container">
+                            <div class="subject-input">
+                                <input type="text" class="subject-name" placeholder="Nume materie" maxlength="100">
+                                <input type="number" min="1" max="10" step="0.01" class="grade-input" placeholder="Nota">
+                                <button type="button" class="btn btn-secondary remove-subject"><i class="fas fa-times"></i></button>
+                            </div>
                         </div>
                         
                         <div class="actions">
-                            <button class="btn btn-secondary" id="add-subject-sem2">
+                            <button type="button" class="btn btn-secondary" id="add-subject-sem2">
                                 <i class="fas fa-plus btn-icon"></i> Adaugă Materie
                             </button>
-                            <button class="btn btn-primary" id="calculate-sem2">
-                                <i class="fas fa-calculator btn-icon"></i> Calculează Media Semestrul II
+                            <button type="button" class="btn btn-primary" id="calculate-sem2">
+                                <i class="fas fa-calculator btn-icon"></i> Calculează Media
                             </button>
                         </div>
                     </div>
                 </div>
                 
                 <div class="actions">
-                    <button class="btn btn-success" id="calculate-annual">
+                    <button type="button" class="btn btn-success" id="calculate-annual">
                         <i class="fas fa-chart-line btn-icon"></i> Calculează Media Anuală
                     </button>
-                    <button class="btn btn-secondary" id="reset-all">
-                        <i class="fas fa-redo btn-icon"></i> Resetează Toate Datele
+                    <button type="button" class="btn btn-secondary" id="reset-all">
+                        <i class="fas fa-redo btn-icon"></i> Resetează
                     </button>
                 </div>
             </section>
@@ -458,7 +442,7 @@
                 <div class="results-card annual-average">
                     <h3><i class="fas fa-award btn-icon"></i> Media Anuală</h3>
                     <div class="result-row">
-                        <span class="result-label">Medie anuală calculată:</span>
+                        <span class="result-label">Medie anuală:</span>
                         <span class="result-value" id="annual-average">-</span>
                     </div>
                     <div class="result-row">
@@ -468,44 +452,202 @@
                 </div>
                 
                 <div class="instructions">
-                    <h3><i class="fas fa-info-circle btn-icon"></i> Instrucțiuni de utilizare</h3>
+                    <h3><i class="fas fa-info-circle btn-icon"></i> Instrucțiuni</h3>
                     <ul>
-                        <li>Introduceți materiile și notele pentru fiecare semestru în câmpurile dedicate</li>
-                        <li>Apăsați "Adaugă Materie" pentru a adăuga mai multe materii</li>
-                        <li>Pentru a elimina o materie, apăsați butonul <i class="fas fa-times"></i></li>
-                        <li>Calculați mediile semestriale individual sau media anuală</li>
-                        <li>Notele trebuie să fie între 1 și 10, cu o zecimală permisă</li>
+                        <li>Introduceți materiile și notele pentru fiecare semestru</li>
+                        <li>Apăsați "Adaugă Materie" pentru mai multe materii</li>
+                        <li>Folosiți butonul <i class="fas fa-times"></i> pentru a elimina o materie</li>
+                        <li>Calculați mediile semestriale apoi media anuală</li>
+                        <li>Notele: 1.00 - 10.00 (două zecimale)</li>
                     </ul>
                 </div>
             </section>
         </div>
         
         <footer>
-            <p>Calculator de medii pentru doctoranzi &copy; 2023 | Instrument academic dezvoltat pentru programele de doctorat</p>
+            <p>Calculator de medii pentru doctoranzi &copy; 2024 | Instrument academic</p>
         </footer>
     </div>
 
     <script>
-        // Date inițiale
-        let semester1Data = [];
-        let semester2Data = [];
-        let semester1Average = null;
-        let semester2Average = null;
-        let annualAverage = null;
+        const state = {
+            semester1Data: [],
+            semester2Data: [],
+            semester1Average: null,
+            semester2Average: null,
+            annualAverage: null
+        };
         
-        // Inițializare aplicație
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function validateGrade(grade) {
+            const num = parseFloat(grade);
+            return !isNaN(num) && num >= 1 && num <= 10;
+        }
+        
+        function attachRemoveListener(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const subjectInput = this.closest('.subject-input');
+                const container = subjectInput.closest('[id$="-inputs-container"]');
+                
+                if (container.querySelectorAll('.subject-input').length > 1) {
+                    subjectInput.remove();
+                } else {
+                    alert('Trebuie să existe cel puțin o materie!');
+                }
+            });
+        }
+        
+        function createSubjectInput() {
+            const div = document.createElement('div');
+            div.className = 'subject-input';
+            div.innerHTML = `
+                <input type="text" class="subject-name" placeholder="Nume materie" maxlength="100">
+                <input type="number" min="1" max="10" step="0.01" class="grade-input" placeholder="Nota">
+                <button type="button" class="btn btn-secondary remove-subject"><i class="fas fa-times"></i></button>
+            `;
+            
+            attachRemoveListener(div.querySelector('.remove-subject'));
+            return div;
+        }
+        
+        function addSubjectInput(containerId) {
+            const container = document.getElementById(containerId);
+            const newInput = createSubjectInput();
+            container.appendChild(newInput);
+            newInput.querySelector('.subject-name').focus();
+        }
+        
+        function calculateSemester(semesterNum) {
+            const containerId = `sem${semesterNum}-inputs-container`;
+            const container = document.getElementById(containerId);
+            const subjects = container.querySelectorAll('.subject-input');
+            
+            const data = [];
+            let total = 0;
+            let validCount = 0;
+            
+            subjects.forEach(subject => {
+                const nameInput = subject.querySelector('.subject-name');
+                const gradeInput = subject.querySelector('.grade-input');
+                
+                const name = nameInput.value.trim();
+                const grade = parseFloat(gradeInput.value);
+                
+                if (name && validateGrade(grade)) {
+                    data.push({ name: name, grade: grade });
+                    total += grade;
+                    validCount++;
+                }
+            });
+            
+            if (validCount === 0) {
+                alert(`Introduceți cel puțin o materie cu notă validă (1-10) pentru Semestrul ${semesterNum}.`);
+                return false;
+            }
+            
+            const average = total / validCount;
+            
+            if (semesterNum === 1) {
+                state.semester1Data = data;
+                state.semester1Average = average;
+            } else {
+                state.semester2Data = data;
+                state.semester2Average = average;
+            }
+            
+            document.getElementById(`sem${semesterNum}-average`).textContent = average.toFixed(2);
+            document.getElementById(`sem${semesterNum}-count`).textContent = validCount;
+            updateSubjectsList(semesterNum);
+            
+            return true;
+        }
+        
+        function calculateAnnual() {
+            if (state.semester1Average === null || state.semester2Average === null) {
+                alert('Calculați mai întâi mediile pentru ambele semestre.');
+                return;
+            }
+            
+            state.annualAverage = (state.semester1Average + state.semester2Average) / 2;
+            
+            document.getElementById('annual-average').textContent = state.annualAverage.toFixed(2);
+            
+            let status = '';
+            if (state.annualAverage >= 9) status = 'Excelent';
+            else if (state.annualAverage >= 8) status = 'Foarte bine';
+            else if (state.annualAverage >= 7) status = 'Bine';
+            else if (state.annualAverage >= 5) status = 'Suficient';
+            else status = 'Insuficient';
+            
+            document.getElementById('annual-status').textContent = status;
+        }
+        
+        function updateSubjectsList(semesterNum) {
+            const data = semesterNum === 1 ? state.semester1Data : state.semester2Data;
+            const container = document.getElementById(`sem${semesterNum}-subjects`);
+            
+            if (data.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #888; padding: 15px;">Nu există materii introduse</p>';
+                return;
+            }
+            
+            let html = '';
+            data.forEach(subject => {
+                const safeName = escapeHtml(subject.name);
+                html += `
+                <div class="subject-item">
+                    <span class="subject-name">${safeName}</span>
+                    <span class="subject-grade">${subject.grade.toFixed(2)}</span>
+                </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function resetAllData() {
+            if (!confirm('Sigur doriți să resetați toate datele?')) {
+                return;
+            }
+            
+            state.semester1Data = [];
+            state.semester2Data = [];
+            state.semester1Average = null;
+            state.semester2Average = null;
+            state.annualAverage = null;
+            
+            ['sem1-inputs-container', 'sem2-inputs-container'].forEach(containerId => {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                const newInput = createSubjectInput();
+                container.appendChild(newInput);
+            });
+            
+            document.getElementById('sem1-average').textContent = '-';
+            document.getElementById('sem1-count').textContent = '0';
+            document.getElementById('sem2-average').textContent = '-';
+            document.getElementById('sem2-count').textContent = '0';
+            document.getElementById('annual-average').textContent = '-';
+            document.getElementById('annual-status').textContent = '-';
+            
+            updateSubjectsList(1);
+            updateSubjectsList(2);
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
-            // Adăugare evenimente pentru tab-uri
-            const semesterTabs = document.querySelectorAll('.semester-tab');
-            semesterTabs.forEach(tab => {
+            document.querySelectorAll('.semester-tab').forEach(tab => {
                 tab.addEventListener('click', function() {
                     const targetSemester = this.getAttribute('data-semester');
                     
-                    // Activează tab-ul selectat
-                    semesterTabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.semester-tab').forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // Arată formularul corespunzător
                     document.querySelectorAll('.semester-form').forEach(form => {
                         form.classList.remove('active');
                     });
@@ -513,318 +655,15 @@
                 });
             });
             
-            // Adăugare materii noi
-            document.getElementById('add-subject-sem1').addEventListener('click', function() {
-                addSubjectInput('semester1-form');
-            });
+            document.getElementById('add-subject-sem1').addEventListener('click', () => addSubjectInput('sem1-inputs-container'));
+            document.getElementById('add-subject-sem2').addEventListener('click', () => addSubjectInput('sem2-inputs-container'));
             
-            document.getElementById('add-subject-sem2').addEventListener('click', function() {
-                addSubjectInput('semester2-form');
-            });
-            
-            // Calculare medii
-            document.getElementById('calculate-sem1').addEventListener('click', calculateSemester1);
-            document.getElementById('calculate-sem2').addEventListener('click', calculateSemester2);
+            document.getElementById('calculate-sem1').addEventListener('click', () => calculateSemester(1));
+            document.getElementById('calculate-sem2').addEventListener('click', () => calculateSemester(2));
             document.getElementById('calculate-annual').addEventListener('click', calculateAnnual);
             document.getElementById('reset-all').addEventListener('click', resetAllData);
             
-            // Exemplu de date predefinite pentru demonstrație
-            setupDemoData();
-        });
-        
-        // Funcție pentru adăugare câmpuri materii
-        function addSubjectInput(semesterFormId) {
-            const form = document.getElementById(semesterFormId);
-            const subjectInputs = form.querySelectorAll('.subject-input');
-            const lastInput = subjectInputs[subjectInputs.length - 1];
-            
-            // Clonează ultimul input
-            const newInput = lastInput.cloneNode(true);
-            
-            // Resetează valorile
-            newInput.querySelector('.subject-name').value = '';
-            newInput.querySelector('.grade-input').value = '';
-            
-            // Adaugă eveniment pentru butonul de eliminare
-            newInput.querySelector('.remove-subject').addEventListener('click', function() {
-                // Păstrează cel puțin un input
-                if (form.querySelectorAll('.subject-input').length > 1) {
-                    newInput.remove();
-                } else {
-                    alert('Trebuie să existe cel puțin o materie!');
-                }
-            });
-            
-            // Adaugă noul input după ultimul
-            lastInput.parentNode.insertBefore(newInput, lastInput.nextSibling);
-            
-            // Adaugă focus pe noul câmp
-            newInput.querySelector('.subject-name').focus();
-        }
-        
-        // Funcție pentru calcularea mediei semestrului 1
-        function calculateSemester1() {
-            const form = document.getElementById('semester1-form');
-            const subjects = form.querySelectorAll('.subject-input');
-            
-            semester1Data = [];
-            let total = 0;
-            let validCount = 0;
-            
-            subjects.forEach(subject => {
-                const name = subject.querySelector('.subject-name').value.trim();
-                const grade = parseFloat(subject.querySelector('.grade-input').value);
-                
-                if (name && !isNaN(grade) && grade >= 1 && grade <= 10) {
-                    semester1Data.push({ name, grade });
-                    total += grade;
-                    validCount++;
-                }
-            });
-            
-            if (validCount > 0) {
-                semester1Average = total / validCount;
-                document.getElementById('sem1-average').textContent = semester1Average.toFixed(2);
-                document.getElementById('sem1-count').textContent = validCount;
-                updateSemester1SubjectsList();
-                
-                // Verifică dacă și semestrul 2 are medie calculată pentru a sugera calculul anual
-                if (semester2Average !== null) {
-                    document.getElementById('annual-status').textContent = 'Poți calcula media anuală';
-                }
-                
-                return true;
-            } else {
-                alert('Te rog introdu cel puțin o materie cu notă validă (între 1 și 10) pentru Semestrul I.');
-                return false;
-            }
-        }
-        
-        // Funcție pentru calcularea mediei semestrului 2
-        function calculateSemester2() {
-            const form = document.getElementById('semester2-form');
-            const subjects = form.querySelectorAll('.subject-input');
-            
-            semester2Data = [];
-            let total = 0;
-            let validCount = 0;
-            
-            subjects.forEach(subject => {
-                const name = subject.querySelector('.subject-name').value.trim();
-                const grade = parseFloat(subject.querySelector('.grade-input').value);
-                
-                if (name && !isNaN(grade) && grade >= 1 && grade <= 10) {
-                    semester2Data.push({ name, grade });
-                    total += grade;
-                    validCount++;
-                }
-            });
-            
-            if (validCount > 0) {
-                semester2Average = total / validCount;
-                document.getElementById('sem2-average').textContent = semester2Average.toFixed(2);
-                document.getElementById('sem2-count').textContent = validCount;
-                updateSemester2SubjectsList();
-                
-                // Verifică dacă și semestrul 1 are medie calculată pentru a sugera calculul anual
-                if (semester1Average !== null) {
-                    document.getElementById('annual-status').textContent = 'Poți calcula media anuală';
-                }
-                
-                return true;
-            } else {
-                alert('Te rog introdu cel puțin o materie cu notă validă (între 1 și 10) pentru Semestrul II.');
-                return false;
-            }
-        }
-        
-        // Funcție pentru calcularea mediei anuale
-        function calculateAnnual() {
-            // Verifică dacă ambele medii semestriale sunt calculate
-            if (semester1Average === null || semester2Average === null) {
-                alert('Pentru a calcula media anuală, te rog să calculezi mai întâi mediile pentru ambele semestre.');
-                return;
-            }
-            
-            // Calculează media anuală (media aritmetică a mediilor semestriale)
-            annualAverage = (semester1Average + semester2Average) / 2;
-            
-            // Actualizează afișajul
-            document.getElementById('annual-average').textContent = annualAverage.toFixed(2);
-            
-            // Determină statusul
-            let status = '';
-            if (annualAverage >= 9) {
-                status = 'Excelent';
-            } else if (annualAverage >= 8) {
-                status = 'Foarte bine';
-            } else if (annualAverage >= 7) {
-                status = 'Bine';
-            } else if (annualAverage >= 5) {
-                status = 'Suficient';
-            } else {
-                status = 'Insuficient';
-            }
-            
-            document.getElementById('annual-status').textContent = status;
-        }
-        
-        // Funcție pentru actualizarea listei de materii pentru semestrul 1
-        function updateSemester1SubjectsList() {
-            const container = document.getElementById('sem1-subjects');
-            
-            if (semester1Data.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #888; padding: 15px;">Nu există materii introduse</p>';
-                return;
-            }
-            
-            let html = '';
-            semester1Data.forEach(subject => {
-                html += `
-                <div class="subject-item">
-                    <span class="subject-name">${subject.name}</span>
-                    <span class="subject-grade">${subject.grade.toFixed(2)}</span>
-                </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-        }
-        
-        // Funcție pentru actualizarea listei de materii pentru semestrul 2
-        function updateSemester2SubjectsList() {
-            const container = document.getElementById('sem2-subjects');
-            
-            if (semester2Data.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #888; padding: 15px;">Nu există materii introduse</p>';
-                return;
-            }
-            
-            let html = '';
-            semester2Data.forEach(subject => {
-                html += `
-                <div class="subject-item">
-                    <span class="subject-name">${subject.name}</span>
-                    <span class="subject-grade">${subject.grade.toFixed(2)}</span>
-                </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-        }
-        
-        // Funcție pentru resetarea tuturor datelor
-        function resetAllData() {
-            if (confirm('Sigur dorești să resetezi toate datele introduse?')) {
-                // Resetează datele
-                semester1Data = [];
-                semester2Data = [];
-                semester1Average = null;
-                semester2Average = null;
-                annualAverage = null;
-                
-                // Resetează formularul semestrul 1
-                const sem1Form = document.getElementById('semester1-form');
-                const sem1Inputs = sem1Form.querySelectorAll('.subject-input');
-                
-                // Păstrează doar primul input și resetează valorile
-                sem1Inputs.forEach((input, index) => {
-                    if (index === 0) {
-                        input.querySelector('.subject-name').value = '';
-                        input.querySelector('.grade-input').value = '';
-                    } else {
-                        input.remove();
-                    }
-                });
-                
-                // Resetează formularul semestrul 2
-                const sem2Form = document.getElementById('semester2-form');
-                const sem2Inputs = sem2Form.querySelectorAll('.subject-input');
-                
-                // Păstrează doar primul input și resetează valorile
-                sem2Inputs.forEach((input, index) => {
-                    if (index === 0) {
-                        input.querySelector('.subject-name').value = '';
-                        input.querySelector('.grade-input').value = '';
-                    } else {
-                        input.remove();
-                    }
-                });
-                
-                // Resetează afișajele
-                document.getElementById('sem1-average').textContent = '-';
-                document.getElementById('sem1-count').textContent = '0';
-                document.getElementById('sem2-average').textContent = '-';
-                document.getElementById('sem2-count').textContent = '0';
-                document.getElementById('annual-average').textContent = '-';
-                document.getElementById('annual-status').textContent = '-';
-                
-                updateSemester1SubjectsList();
-                updateSemester2SubjectsList();
-                
-                alert('Toate datele au fost resetate cu succes!');
-            }
-        }
-        
-        // Funcție pentru setarea datelor de demonstrație
-        function setupDemoData() {
-            // Date demo pentru semestrul 1
-            const sem1DemoData = [
-                { name: "Metodologia cercetării științifice", grade: 9.5 },
-                { name: "Statistică avansată", grade: 8.7 },
-                { name: "Studii de specialitate I", grade: 9.0 }
-            ];
-            
-            // Date demo pentru semestrul 2
-            const sem2DemoData = [
-                { name: "Elaborarea tezei de doctorat", grade: 9.2 },
-                { name: "Comunicare academică", grade: 8.8 },
-                { name: "Cercetare aplicată", grade: 9.5 }
-            ];
-            
-            // Completează formularul pentru semestrul 1
-            const sem1Form = document.getElementById('semester1-form');
-            const sem1Inputs = sem1Form.querySelectorAll('.subject-input');
-            
-            sem1DemoData.forEach((data, index) => {
-                if (index < sem1Inputs.length) {
-                    sem1Inputs[index].querySelector('.subject-name').value = data.name;
-                    sem1Inputs[index].querySelector('.grade-input').value = data.grade;
-                }
-            });
-            
-            // Completează formularul pentru semestrul 2
-            const sem2Form = document.getElementById('semester2-form');
-            const sem2Inputs = sem2Form.querySelectorAll('.subject-input');
-            
-            sem2DemoData.forEach((data, index) => {
-                if (index < sem2Inputs.length) {
-                    sem2Inputs[index].querySelector('.subject-name').value = data.name;
-                    sem2Inputs[index].querySelector('.grade-input').value = data.grade;
-                }
-            });
-            
-            // Calculează mediile pentru demonstrație
-            setTimeout(() => {
-                calculateSemester1();
-                calculateSemester2();
-                calculateAnnual();
-            }, 500);
-        }
-        
-        // Adaugă evenimente pentru butoanele de eliminare materii existente
-        document.querySelectorAll('.remove-subject').forEach(button => {
-            button.addEventListener('click', function() {
-                const subjectInput = this.closest('.subject-input');
-                const form = subjectInput.closest('.semester-form');
-                
-                // Păstrează cel puțin un input
-                if (form.querySelectorAll('.subject-input').length > 1) {
-                    subjectInput.remove();
-                } else {
-                    alert('Trebuie să existe cel puțin o materie!');
-                }
-            });
+            document.querySelectorAll('.remove-subject').forEach(attachRemoveListener);
         });
     </script>
 </body>
